@@ -1,4 +1,5 @@
-<li>Примеры запросов Postman   https://app.getpostman.com/join-team?invite_code=2471488fd0296b24030d96fcd6ee9734&target_code=df4e6d4c919d8eefd54b15417d3b170f/ -  </li>
-<li>test_branch \ testartefacts\ test-cases  - тест кейсы </li>
-<li>test_branch \ testartefacts\ checklist - чек-листы </li>
-<li>test_branch \ testartefacts\ bugreport - баг репорты </li>
+- Примеры запросов Postman [ссылка](https://www.postman.com/kosmonaft80/workspace/test-task/collection/25290198-0d43cc1a-faf2-413b-bad3-8c481778a9f1?action=share&creator=25290198/)
+- Тест кейсы: test_branch \ testartefacts\ test-cases
+- Чек-листы: test_branch \ testartefacts\ checklist 
+- Баг репорты: test_branch \ testartefacts\ bugreport
+- Примеры SQL запросов
