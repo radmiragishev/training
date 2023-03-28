@@ -2,4 +2,4 @@
 - Тест кейсы: test_branch \ testartefacts\ test-cases
 - Чек-листы: test_branch \ testartefacts\ checklist 
 - Баг репорты: test_branch \ testartefacts\ bugreport
-
+- Примеры SQL запросов
