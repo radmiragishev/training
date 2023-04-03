@@ -1,0 +1,107 @@
+SQL-запрос.
+
+Вводные данные:
+
+Имеется таблица клиентов, в которой хранятся данные по компании, сотрудникам и их заявкам.
+
+Структура таблицы client:
+
+Id – уникальный идентификатор компании
+
+company_name – название компании
+
+user_number – уникальный идентификатор сотрудника
+
+user_name – фамилия и инициалы сотрудников
+
+amount_of_applications – количество заявок
+
+Задание 1:
+Вывести ФИО сотрудника и название его компании, количество заявок от которых принадлежит интервалу от 2 до 14 (включая границы). Информацию отсортировать сначала по полю ФИО сотрудника (в обратном алфавитном порядке), а затем по названию компании (по алфавиту).
+Ответ:
+SELECT  user_name, company_name
+FROM client
+WHERE amount_of_applications BETWEEN 2 AND 14
+ORDER BY user_name DESC, company_name
+
+Задание 2:
+Вывести название и автора тех книг, название которых состоит из двух и более слов, а инициалы автора содержат букву «С». Считать, что в названии слова отделяются друг от друга пробелами и не содержат знаков препинания, между фамилией автора и инициалами обязателен пробел, инициалы записываются без пробела в формате: буква, точка, буква, точка. Информацию отсортировать по названию книги в алфавитном порядке.
+Ответ:
+SELECT title, author 
+FROM book 
+WHERE title LIKE '_% _%' AND (author LIKE "% С._." OR author LIKE "% _.С.") 
+ORDER BY title;  
+
+Задание 3:
+Вывести автора, название и количество книг, в отсортированном в алфавитном порядке по автору и по убыванию количества, для тех книг, цены которых меньше 750 рублей.
+Ответ:
+Вариант 1
+SELECT author, title, amount AS Количество
+FROM book
+WHERE price < 750
+ORDER BY author, amount DESC;
+
+Вариант 2:
+SELECT author, title, amount AS Количество
+FROM book
+WHERE price < 750
+ORDER BY author, Количество DESC;
+
+Вариант 3:
+SELECT author, title, amount AS Количество
+FROM book
+WHERE price < 750
+ORDER BY 1, 3 DESC;
+
+Задание 4:
+Выбрать различных авторов, книги которых хранятся в таблице book.
+Ответ:
+Вариант 1:
+SELECT DISTINCT author
+FROM book;
+Вариант 2:
+SELECT  author
+FROM book
+GROUP BY author;
+
+Задание 5:
+Вывести информацию (автора, название и цену) о  книгах, цены которых меньше или равны средней цене книг на складе. Информацию вывести в отсортированном по убыванию цены виде. Среднее вычислить как среднее по цене книги.
+Ответ:
+SELECT author, title, price 
+FROM book 
+WHERE price <= ( SELECT AVG(price) FROM book ) 
+ORDER BY price DESC;
+
+Задание 6:
+Вывести название, жанр и цену тех книг, количество которых больше 8, в отсортированном по убыванию цены виде.
+Ответ:
+SELECT title, name_genre ,price
+FROM book INNER JOIN genre
+ON genre.genre_id=book.genre_id and book.amount >8
+ORDER BY book.price DE
+
+Задание 7:
+Вывести название всех книг каждого автора, если книг некоторых авторов в данный момент нет на складе – вместо названия книги указать Null.
+Ответ:
+SELECT name_author, title 
+FROM author LEFT JOIN book
+ON author.author_id = book.author_id
+ORDER BY name_author; 
+
+Задание 8:
+Вывести количество различных книг каждого автора. Информацию отсортировать в алфавитном порядке по фамилиям  авторов.
+Ответ:
+SELECT name_author, count(title) AS Количество
+FROM author LEFT JOIN book
+ON author.author_id = book.author_id
+GROUP BY name_author
+ORDER BY name_author; 
+
+Задание 9:
+Вывести в алфавитном порядке всех авторов, которые пишут только в одном жанре. Поскольку у нас в таблицах так занесены данные, что у каждого автора книги только в одном жанре,  для этого запроса внесем изменения в таблицу book.
+Ответ:
+SELECT name_author
+FROM book b INNER JOIN author a
+ON b.author_id=a.author_id
+GROUP BY name_author
+HAVING COUNT(DISTINCT(genre_id))=1;
